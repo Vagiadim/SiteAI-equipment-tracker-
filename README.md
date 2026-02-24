@@ -75,7 +75,7 @@ Construction sites rely on manual tracking of heavy equipment, which is time-con
 
 ### Steps
 
-1. Open the training notebook: [`notebooks/SiteAI_Equipment_Tracker_Training.ipynb`](notebooks/SiteAI_Equipment_Tracker_Training.ipynb)
+1. Open the training notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Vagiadim/SiteAI-equipment-tracker-/blob/main/notebooks/B01_M04_U03_COLABDRAFT_VD.ipynb)
 2. Click **"Open in Colab"** or upload it to [colab.research.google.com](https://colab.research.google.com)
 3. Set runtime to **T4 GPU**: `Runtime → Change runtime type → T4 GPU`
 4. Run **Cell 1** (Environment Setup) — installs `ultralytics` and verifies GPU
