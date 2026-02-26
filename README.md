@@ -14,15 +14,17 @@ Construction sites rely on manual tracking of heavy equipment, which is time-con
 
 ## Classes
 
-| # | Class | Label Rule |
-|---|-------|-----------|
-| 0 | `boom_lift` | Aerial work platform with articulating or telescopic boom arm |
-| 1 | `dump_truck` | Truck with open-box bed for hauling loose materials |
-| 2 | `excavator` | Tracked or wheeled machine with bucket on articulated arm |
-| 3 | `loader` | Front-end loader with wide bucket for scooping/moving materials |
-| 4 | `mixer_truck` | Truck with rotating drum for transporting concrete |
-| 5 | `roller` | Compaction machine with heavy cylindrical drum(s) |
-| 6 | `tower_crane` | Fixed crane with horizontal jib mounted on tall vertical mast |
+| ID | Equipment Class | Label Rule - OD |
+| :--- | :--- | :--- |
+| 0 | **Boom Lift** | Aerial platforms for high-access architectural finishing. |
+| 1 | **Dump Truck** | Heavy vehicles for hauling earthwork and debris. |
+| 2 | **Excavator** | Primary machinery for foundation and trenching. |
+| 3 | **Loader** | Material handling for stockpiles and site clearing. |
+| 4 | **Mixer Truck** | Concrete transport and active pouring monitoring. |
+| 5 | **Roller** | Soil and asphalt compaction for site preparation. |
+| 6 | **Tower Crane** | Vertical lifting for structural assembly. |
+| 7 | **Forklift** | Logistics and palletized material movement. |
+| 8 | **Backhoe** | Dual-purpose digging and loading equipment. |
 
 ---
 
