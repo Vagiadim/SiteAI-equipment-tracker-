@@ -1,182 +1,114 @@
-# SiteAI Equipment Tracker
+SiteAI Equipment Tracker
+YOLOv8 construction equipment detection for automated site monitoring
+MAICEN M4U3 Assignment — Team 7
+Show Image
 
-YOLOv8-based construction equipment detection for automated site monitoring.
+Problem Statement
+Construction sites require continuous monitoring of heavy equipment for safety, logistics, and progress tracking. Manual monitoring is time-consuming and error-prone. This project uses YOLOv8 object detection to automatically identify and locate construction equipment in site images, providing a proof-of-concept for automated site monitoring.
+Success criteria: Achieve mAP@50 > 50% across all classes with a fully cloud-reproducible pipeline.
 
----
+Dataset
 
-## Problem Statement
+Source: Roboflow (SiteAI-equipment-tracker, Team 7)
+Format: YOLOv8 (exported from Roboflow)
+Split: 80/20 (train/val)
+Image size: 512×512
+Download: Automatically downloaded from GitHub Release v1.0
 
-Construction sites rely on manual tracking of heavy equipment, which is time-consuming, error-prone, and creates safety blind spots. This project trains an object detection model to automatically identify and locate construction equipment in site images, enabling real-time equipment monitoring for project managers and safety officers.
+Classes (7)
+ClassDescriptionboom_liftAerial work platform with articulating or telescoping boomdump_truckTruck with open-box bed for transporting loose materialexcavatorTracked machine with bucket arm for diggingloaderWheeled machine with front-mounted bucketmixer_truckTruck with rotating drum for transporting concreterollerCompaction machine for flattening surfacestower_craneFixed crane with horizontal jib mounted on tall mast
 
-**Success criteria:** The model should reliably detect the 7 target equipment classes in typical construction site imagery, achieving a minimum mAP@50 of 50% as a baseline for a proof-of-concept system.
+Results
+Results from training YOLOv8n for 50 epochs at 512×512 resolution on a Tesla T4 GPU.
+Overall Metrics
+MetricValuePrecisionUPDATE AFTER RUNRecallUPDATE AFTER RUNmAP@50UPDATE AFTER RUNmAP@50-95UPDATE AFTER RUN
+Per-Class Performance (mAP@50)
+ClassmAP@50Statusboom_liftUPDATEdump_truckUPDATEexcavatorUPDATEloaderUPDATEmixer_truckUPDATErollerUPDATEtower_craneUPDATE
+Key Takeaways
 
----
+Best performing classes: UPDATE AFTER RUN
+Weakest classes: UPDATE AFTER RUN
+The model serves as a viable proof-of-concept for automated construction equipment detection
+Weak classes can be improved with more training data and better annotation coverage
 
-## Classes
 
-| ID | Equipment Class | Label Rule - OD |
-| :--- | :--- | :--- |
-| 0 | **Boom Lift** | Aerial platforms for high-access architectural finishing. |
-| 1 | **Dump Truck** | Heavy vehicles for hauling earthwork and debris. |
-| 2 | **Excavator** | Primary machinery for foundation and trenching. |
-| 3 | **Loader** | Material handling for stockpiles and site clearing. |
-| 4 | **Mixer Truck** | Concrete transport and active pouring monitoring. |
-| 5 | **Roller** | Soil and asphalt compaction for site preparation. |
-| 6 | **Tower Crane** | Vertical lifting for structural assembly. |
-| 7 | **Forklift** | Logistics and palletized material movement. |
-| 8 | **Backhoe** | Dual-purpose digging and loading equipment. |
+How to Reproduce
 
----
+One-click reproduction: Click the Colab badge above, select T4 GPU, and hit Run All. No manual uploads needed.
 
-## Dataset
+Step-by-step:
 
-- **Source:** [Roboflow — SiteAI Equipment Tracker v9 (Team7_Dataset_V1)](YOUR_ROBOFLOW_LINK_HERE)
-- **Format:** YOLOv8
-- **Split:** 80/20 (train/validation)
-- **Images:** _UPDATE_AFTER_COLAB_ train / _UPDATE_ val / _UPDATE_ test
-- **Rights:** Dataset created and annotated by the team for academic purposes
-- **Annotation Tool:** Roboflow Annotate  
-- **Labeling Format:** YOLOv8 TXT  
-- **Bounding Box Standardization:** All boxes reviewed by two team members for consistency.
+Click the Open in Colab badge above (or open the notebook from notebooks/)
+Go to Runtime → Change runtime type → T4 GPU
+Click Runtime → Run all
+The notebook will automatically:
 
----
+Install dependencies
+Download the dataset from GitHub Release v1.0
+Extract and configure dataset paths
+Remove Roboflow metadata for independence
+Train YOLOv8n for 50 epochs (512×512)
+Evaluate and display metrics + training curves
+Show a visual performance dashboard
+Run predictions on 10 validation images
+Display a 6×6 evidence grid with class coverage
+Download and run predictions on 5 new unseen images from GitHub
+Print a reproducibility summary
 
-## Results Summary
 
-## Performance Interpretation
+Total runtime: ~30–50 minutes on T4 GPU
 
-- mAP@50 of XX% indicates moderate object localization reliability for structured site imagery.
-- Lower mAP@50-95 suggests bounding box precision could improve with more diverse scale variation.
-- Performance is sufficient for assisted monitoring workflows but not yet suitable for safety-critical automation.
 
-### Overall Metrics
+Reproducibility Checklist
+ParameterValueModelYOLOv8n (Nano)FrameworkUltralyticsEpochs50Image size512Batch sizeautoEarly stoppingpatience=15CacheRAMGPUTesla T4 (Google Colab)DatasetGitHub Release v1.0 (auto-download)New test imagesGitHub repo (auto-download)Manual uploadsNone (fully cloud-based)
 
-| Metric | Value |
-|--------|-------|
-| Precision | _UPDATE_AFTER_COLAB_ |
-| Recall | _UPDATE_AFTER_COLAB_ |
-| mAP@50 | _UPDATE_AFTER_COLAB_ |
-| mAP@50-95 | _UPDATE_AFTER_COLAB_ |
-
-### Per-Class mAP@50
-
-| Class | mAP@50 |
-|-------|--------|
-| boom_lift | _UPDATE_ |
-| dump_truck | _UPDATE_ |
-| excavator | _UPDATE_ |
-| loader | _UPDATE_ |
-| mixer_truck | _UPDATE_ |
-| roller | _UPDATE_ |
-| tower_crane | _UPDATE_ |
-
-### Key Takeaways
-
-1. **Strongest classes:** Loader and roller achieved the highest detection performance, likely due to their distinctive shapes and consistent appearance across images.
-2. **Weakest classes:** Dump truck and tower crane had the lowest mAP, likely due to high visual variability (dump trucks resemble other trucks) and scale issues (tower cranes are often partially visible or very far away).
-3. **Overall:** The model demonstrates a viable proof-of-concept for automated equipment tracking, with clear paths for improvement through targeted data augmentation.
-
----
-
-## How to Reproduce
-
-### Requirements
-- Google Colab (free tier with T4 GPU)
-- Roboflow dataset zip file (link above)
-
-### Steps
-
-1. Open the training notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Vagiadim/SiteAI-equipment-tracker-/blob/main/notebooks/B01_M04_U03_COLABDRAFT_VD.ipynb)
-2. Click **"Open in Colab"** or upload it to [colab.research.google.com](https://colab.research.google.com)
-3. Set runtime to **T4 GPU**: `Runtime → Change runtime type → T4 GPU`
-4. Run **Cell 1** (Environment Setup) — installs `ultralytics` and verifies GPU
-5. Run **Cell 2** (Dataset Upload) — upload the Roboflow zip when prompted
-6. Run **Cell 3** (Fix Paths) — updates YAML paths for Colab
-7. Run **Cell 4** (Training) — trains YOLOv8n for 30 epochs (~30–50 min)
-8. Run **Cells 5–7** (Evaluation) — prints metrics, curves, validation predictions
-9. Run **Cell 8** (New Images) — upload 5 unseen images for inference
-10. Run **Cells 9–10** — download weights + reproducibility summary
-
-### Expected Outputs
-- Metrics table (P/R/mAP50/mAP50-95)
-- Training curves (loss, precision, recall, mAP)
-- Confusion matrix
-- 10 validation prediction images with bounding boxes
-- 5 new image prediction images with bounding boxes
-
----
-
-## Reproducibility Checklist
-
-| Parameter | Value |
-|-----------|-------|
-| Dataset | SiteAI-equipment-tracker v9 (Team7_Dataset_V1) |
-| Dataset link | [Roboflow](YOUR_ROBOFLOW_LINK_HERE) |
-| Model variant | YOLOv8n (Nano) |
-| Epochs | 30 |
-| Batch size | auto |
-| Image size | 640 |
-| Early stopping | patience=10 |
-| Ultralytics version | 8.3.0 |
-| Last successful run | _UPDATE_AFTER_COLAB_ |
-| GPU used | _UPDATE_AFTER_COLAB_ (e.g., Tesla T4) |
-| Expected runtime | ~30–50 min on T4 GPU |
-
-**Verification Note:**  
-If GPU is unavailable, a 5-epoch verification run can be executed and the provided `best.pt` weights loaded for full inference evaluation.
----
-
-## Repository Structure
-
-```
-SiteAI-equipment-tracker/
+Repository Structure
+SiteAI-equipment-tracker-/
 ├── README.md
 ├── LICENSE (MIT)
 ├── notebooks/
-│   └── SiteAI_Equipment_Tracker_Training.ipynb
+│   └── M4U3_Assignment_Team_7_object_detection.ipynb
 ├── docs/
-│   ├── class_definitions.md
 │   ├── error_analysis.md
-│   └── governance_checklist.md
+│   ├── governance_checklist.md
+│   └── class_definitions.md
 ├── results/
-│   ├── curves/          ← training plots & confusion matrix
+│   ├── curves/
 │   └── evidence/
-│       ├── annotations/ ← 3–5 Roboflow annotation examples
-│       ├── val_preds/   ← 10 validation predictions
-│       └── new_preds/   ← 5 new image predictions
+│       ├── annotations/
+│       ├── val_preds/
+│       ├── new_preds/
+│       └── new_test_images/
 └── deliverables/
-    ├── slides.pdf       ← 6–8 slide presentation
-    └── mini_report.pdf  ← 2-page executive summary
-```
+    ├── slides.pdf
+    └── mini_report.pdf
 
----
+Notebook Structure
+CellWhat It Does1Environment setup — installs Ultralytics, checks GPU2Downloads dataset.zip from GitHub Release v1.03Unzips dataset and inspects folder structure4Locates and displays data.yaml configuration5Fixes dataset paths for Colab (auto-detects valid/val)6Removes Roboflow metadata for platform independence7Trains YOLOv8n — 50 epochs, 512px, auto batch, patience=158Evaluates model — regenerates validation plots9Lists training output files9.aDisplays training visualizations (styled dark theme)9.bVisual metrics dashboard (bar chart)10Saves best weights for download10.aDownloads 5 new test images from GitHub (no manual upload)11Runs predictions on new test images and displays results11.a6×6 evidence grid with class coverage12Prints reproducibility summary
 
-## Trained Weights
+Trained Weights
+Download from GitHub Release v1.0:
 
-Download the trained model weights from [GitHub Releases](../../releases/tag/v1.0).
+dataset.zip — Full dataset (YOLOv8 format)
+best.pt — Trained model weights
 
-- **File:** `best.pt`
-- **Size:** ~6 MB (YOLOv8n)
 
----
+Documentation
 
-## Documentation
+docs/error_analysis.md — False positives, false negatives, and data improvement plan
+docs/governance_checklist.md — Privacy, limitations, and risk assessment
+docs/class_definitions.md — Label rules for all 7 classes
 
-- [Class Definitions](docs/class_definitions.md)
-- [Error Analysis](docs/error_analysis.md) — 3 FP, 3 FN, 3 data improvements
-- [Governance Checklist](docs/governance_checklist.md) — includes privacy, bias considerations, operational limitations, and acceptable-use boundaries.
 
----
+Deliverables
 
-## Deliverables
+deliverables/slides.pdf — Presentation slides (6–8 slides)
+deliverables/mini_report.pdf — 2-page summary report
 
-- [Presentation Slides (PDF)](deliverables/slides.pdf)
-- [Mini Report (PDF)](deliverables/mini_report.pdf)
 
----
+License
+This project is licensed under the MIT License.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-The dataset was created and annotated by the team for academic use within the MAICEN program at Zigurat Institute of Technology.
+Team
+Team 7 — MAICEN Module 4, Unit 3
+Zigurat Institute of Technology
