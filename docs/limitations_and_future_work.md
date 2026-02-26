@@ -12,7 +12,30 @@ While the current YOLOv8n model provides a strong baseline for equipment trackin
 * **Visual Mimicry:** The model occasionally struggles with "Dump Trucks" vs. general logistics vehicles due to high visual similarity in chassis design.
 
 **This called for a comparison between models on YOLOv8n and YOLOv8s, as well as a training run on Roboflow, resulting in the following:**
+### Model Comparison — Overall Metrics
 
+| Metric | YOLOv8n (Nano) | YOLOv8s (Small) | Improvement |
+|--------|---------------|----------------|-------------|
+| Precision | 0.712 | 0.752 | +5.6% |
+| Recall | 0.565 | 0.635 | +12.4% |
+| mAP@50 | 0.637 | 0.679 | +6.6% |
+| mAP@50-95 | 0.465 | 0.500 | +7.5% |
+| Parameters | 3.0M | 11.1M | 3.7× |
+| GFLOPs | 8.1 | 28.5 | 3.5× |
+| Training time | 0.123 hrs (~7 min) | 0.217 hrs (~13 min) | 1.8× |
+| Weights size | 6.2 MB | 22.5 MB | 3.6× |
+
+### Per-Class Comparison (mAP@50)
+
+| Class | YOLOv8n | YOLOv8s | Change | Status |
+|-------|---------|---------|--------|--------|
+| mixer_truck | 0.883 | 0.935 | +5.2% | ✅ Excellent |
+| roller | 0.879 | 0.875 | -0.4% | ✅ Excellent |
+| loader | 0.828 | 0.898 | +7.0% | ✅ Excellent |
+| excavator | 0.766 | 0.754 | -1.2% | ✅ Good |
+| dump_truck | 0.422 | 0.451 | +2.9% | ⚠️ Weak |
+| tower_crane | 0.394 | 0.404 | +1.0% | ⚠️ Weak |
+| boom_lift | 0.286 | 0.440 | +15.4% | ⚠️ Weak |
 
 *Key Takeaway: YOLOv8s outperforms YOLOv8n across most metrics, with the biggest gains in recall (+12.4%) and mAP@50-95 (+7.5%)*
 ---
