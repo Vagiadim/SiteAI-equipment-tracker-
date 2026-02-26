@@ -37,7 +37,8 @@ While the current YOLOv8n model provides a strong baseline for equipment trackin
 | tower_crane | 0.394 | 0.404 | +1.0% | ⚠️ Weak |
 | boom_lift | 0.286 | 0.440 | +15.4% | ⚠️ Weak |
 
-*Key Takeaway: YOLOv8s outperforms YOLOv8n across most metrics, with the biggest gains in recall (+12.4%) and mAP@50-95 (+7.5%)*
+#### *Key Takeaway: Confirmation that the dataset quality is sufficient for high-accuracy detection.*
+#### *The gap between our YOLOv8s results (67.9% mAP@50) and RF-DETR (89.2%) suggests that a larger model architecture and/or more advanced training techniques could significantly improve performance.*
 ---
 
 ### 2. Future Work & Scalability
