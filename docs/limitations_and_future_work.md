@@ -11,6 +11,10 @@ While the current YOLOv8n model provides a strong baseline for equipment trackin
 * **Scale Inconsistency:** Detection confidence for smaller assets (e.g., Forklifts) is lower when captured from high-altitude mounting points, such as tower crane cabins, compared to ground-level CCTV.
 * **Visual Mimicry:** The model occasionally struggles with "Dump Trucks" vs. general logistics vehicles due to high visual similarity in chassis design.
 
+**This called for a comparison between models on YOLOv8n and YOLOv8s, as well as a training run on Roboflow, resulting in the following:**
+
+
+*Key Takeaway: YOLOv8s outperforms YOLOv8n across most metrics, with the biggest gains in recall (+12.4%) and mAP@50-95 (+7.5%)*
 ---
 
 ### 2. Future Work & Scalability
