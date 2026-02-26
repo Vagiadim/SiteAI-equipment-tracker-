@@ -41,38 +41,43 @@ Construction sites require continuous monitoring of heavy equipment for safety, 
 
 ## Results
 
-Results from training YOLOv8n for 50 epochs at 512×512 resolution on a Tesla T4 GPU.  
-Training completed in 0.123 hours (~7.4 minutes).
+Both models were trained for 50 epochs at 512×512 resolution on a Tesla T4 GPU.
 
-### Overall Metrics
+### Model Comparison — Overall Metrics
 
-| Metric | Value |
-|--------|-------|
-| Precision | 0.712 |
-| Recall | 0.565 |
-| mAP@50 | 0.637 |
-| mAP@50-95 | 0.465 |
+| Metric | YOLOv8n (Nano) | YOLOv8s (Small) | Improvement |
+|--------|---------------|----------------|-------------|
+| Precision | 0.712 | 0.752 | +5.6% |
+| Recall | 0.565 | 0.635 | +12.4% |
+| mAP@50 | 0.637 | 0.679 | +6.6% |
+| mAP@50-95 | 0.465 | 0.500 | +7.5% |
+| Parameters | 3.0M | 11.1M | 3.7× |
+| GFLOPs | 8.1 | 28.5 | 3.5× |
+| Training time | 0.123 hrs (~7 min) | 0.217 hrs (~13 min) | 1.8× |
+| Weights size | 6.2 MB | 22.5 MB | 3.6× |
 
-### Per-Class Performance (mAP@50)
+### Per-Class Comparison (mAP@50)
 
-| Class | Images | Instances | Precision | Recall | mAP@50 | mAP@50-95 | Status |
-|-------|--------|-----------|-----------|--------|--------|-----------|--------|
-| mixer_truck | 10 | 23 | 0.760 | 0.826 | 0.883 | 0.729 | ✅ Excellent |
-| roller | 10 | 13 | 0.760 | 0.769 | 0.879 | 0.784 | ✅ Excellent |
-| loader | 4 | 6 | 0.599 | 0.833 | 0.828 | 0.688 | ✅ Good |
-| excavator | 16 | 52 | 0.676 | 0.731 | 0.766 | 0.471 | ✅ Good |
-| dump_truck | 11 | 49 | 0.793 | 0.235 | 0.422 | 0.228 | ⚠️ Weak |
-| tower_crane | 9 | 36 | 0.599 | 0.361 | 0.394 | 0.217 | ⚠️ Weak |
-| boom_lift | 2 | 5 | 0.799 | 0.200 | 0.286 | 0.134 | ⚠️ Weak |
+| Class | YOLOv8n | YOLOv8s | Change | Status |
+|-------|---------|---------|--------|--------|
+| mixer_truck | 0.883 | 0.935 | +5.2% | ✅ Excellent |
+| roller | 0.879 | 0.875 | -0.4% | ✅ Excellent |
+| loader | 0.828 | 0.898 | +7.0% | ✅ Excellent |
+| excavator | 0.766 | 0.754 | -1.2% | ✅ Good |
+| dump_truck | 0.422 | 0.451 | +2.9% | ⚠️ Weak |
+| tower_crane | 0.394 | 0.404 | +1.0% | ⚠️ Weak |
+| boom_lift | 0.286 | 0.440 | +15.4% | ⚠️ Weak |
 
 ### Key Takeaways
 
-- **Best performing classes:** mixer_truck (88.3%), roller (87.9%), loader (82.8%) — all above 80% mAP@50
-- **Weakest classes:** boom_lift (28.6%), tower_crane (39.4%), dump_truck (42.2%)
-- Weak classes suffer from low recall, suggesting the model misses many instances (false negatives)
-- boom_lift has only 2 validation images / 5 instances — too few for reliable evaluation
-- The model serves as a viable proof-of-concept for automated construction equipment detection
-- Weak classes can be improved with more training data, better annotation coverage, and data augmentation
+- **YOLOv8s outperforms YOLOv8n** across most metrics, with the biggest gains in recall (+12.4%) and mAP@50-95 (+7.5%)
+- **Best performing classes:** mixer_truck (93.5%), loader (89.8%), roller (87.5%) — all above 85% mAP@50 with YOLOv8s
+- **Weakest classes:** boom_lift, tower_crane, dump_truck — all below 50% mAP@50
+- **Biggest improvement from YOLOv8s:** boom_lift jumped from 28.6% to 44.0% (+15.4%), likely due to the larger model's ability to capture finer features
+- **Weak classes suffer from low recall** — the model misses many instances (false negatives), especially for dump_truck (30.6%) and tower_crane (31.1%)
+- **boom_lift** has only 2 validation images / 5 instances — too few for reliable evaluation
+- The larger YOLOv8s model costs 3.5× more compute but delivers meaningful accuracy gains, especially for underrepresented classes
+- Both models serve as a viable proof-of-concept; weak classes need more training data and better annotation coverage
 
 ---
 
@@ -91,12 +96,14 @@ Training completed in 0.123 hours (~7.4 minutes).
    - Extract and configure dataset paths
    - Remove Roboflow metadata for independence
    - Train YOLOv8n for 50 epochs (512×512)
-   - Evaluate and display metrics + training curves
+   - Train YOLOv8s for 50 epochs (512×512) for comparison
+   - Evaluate both models and display metrics + training curves
    - Show a visual performance dashboard
+   - Display a side-by-side YOLOv8n vs YOLOv8s comparison chart
    - Run predictions on new test images downloaded from GitHub
    - Display a 6×6 evidence grid with class coverage
    - Print a reproducibility summary
-5. Total runtime: ~20–40 minutes on T4 GPU
+5. Total runtime: ~30–50 minutes on T4 GPU
 
 ---
 
@@ -104,7 +111,7 @@ Training completed in 0.123 hours (~7.4 minutes).
 
 | Parameter | Value |
 |-----------|-------|
-| Model | YOLOv8n (Nano) |
+| Models | YOLOv8n (Nano) + YOLOv8s (Small) |
 | Framework | Ultralytics 8.4.18 |
 | Python | 3.12.12 |
 | PyTorch | 2.10.0+cu128 |
@@ -114,12 +121,11 @@ Training completed in 0.123 hours (~7.4 minutes).
 | Early stopping | patience=15 |
 | Cache | RAM |
 | GPU | Tesla T4 (14913 MiB) |
-| Parameters | 3,007,013 |
-| GFLOPs | 8.1 |
+| YOLOv8n params | 3,007,013 (8.1 GFLOPs) |
+| YOLOv8s params | 11,128,293 (28.5 GFLOPs) |
 | Dataset | GitHub Release v1.0 (auto-download) |
 | New test images | GitHub repo (auto-download) |
 | Manual uploads | None (fully cloud-based) |
-| Training time | 0.123 hours (~7.4 min) |
 | Last run | 2026-02-26 |
 
 ---
@@ -161,7 +167,10 @@ SiteAI-equipment-tracker-/
 | 5 | Fixes dataset paths for Colab (auto-detects valid/val) |
 | 6 | Removes Roboflow metadata for platform independence |
 | 7 | Trains YOLOv8n — 50 epochs, 512px, auto batch, patience=15 |
-| 8 | Evaluates model — regenerates validation plots |
+| 7b | Trains YOLOv8s — 50 epochs, 512px (for comparison) |
+| 8 | Evaluates YOLOv8n — validation metrics + plots |
+| 8b | Evaluates YOLOv8s — validation metrics + plots |
+| 8c | Side-by-side YOLOv8n vs YOLOv8s comparison chart |
 | 9 | Lists training output files |
 | 9.a | Displays training visualizations (styled dark theme) |
 | 9.b | Visual metrics dashboard (bar chart) |
@@ -169,7 +178,7 @@ SiteAI-equipment-tracker-/
 | 10.a | Downloads 5 new test images from GitHub (no manual upload) |
 | 11 | Runs predictions on new test images and displays results |
 | 11.a | 6×6 evidence grid with class coverage |
-| 12 | Prints reproducibility summary |
+| 12 | Prints reproducibility summary with model comparison |
 
 ---
 
@@ -177,7 +186,7 @@ SiteAI-equipment-tracker-/
 
 Download from [GitHub Release v1.0](https://github.com/Vagiadim/SiteAI-equipment-tracker-/releases/tag/v1.0):
 - `dataset.zip` — Full dataset (YOLOv8 format)
-- `best.pt` — Trained model weights (6.2 MB)
+- `best.pt` — Trained YOLOv8n weights (6.2 MB)
 
 ---
 
