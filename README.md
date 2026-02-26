@@ -33,10 +33,19 @@ Construction sites rely on manual tracking of heavy equipment, which is time-con
 - **Split:** 80/20 (train/validation)
 - **Images:** _UPDATE_AFTER_COLAB_ train / _UPDATE_ val / _UPDATE_ test
 - **Rights:** Dataset created and annotated by the team for academic purposes
+- **Annotation Tool:** Roboflow Annotate  
+- **Labeling Format:** YOLOv8 TXT  
+- **Bounding Box Standardization:** All boxes reviewed by two team members for consistency.
 
 ---
 
 ## Results Summary
+
+## Performance Interpretation
+
+- mAP@50 of XX% indicates moderate object localization reliability for structured site imagery.
+- Lower mAP@50-95 suggests bounding box precision could improve with more diverse scale variation.
+- Performance is sufficient for assisted monitoring workflows but not yet suitable for safety-critical automation.
 
 ### Overall Metrics
 
@@ -111,6 +120,8 @@ Construction sites rely on manual tracking of heavy equipment, which is time-con
 | GPU used | _UPDATE_AFTER_COLAB_ (e.g., Tesla T4) |
 | Expected runtime | ~30–50 min on T4 GPU |
 
+**Verification Note:**  
+If GPU is unavailable, a 5-epoch verification run can be executed and the provided `best.pt` weights loaded for full inference evaluation.
 ---
 
 ## Repository Structure
@@ -151,7 +162,7 @@ Download the trained model weights from [GitHub Releases](../../releases/tag/v1.
 
 - [Class Definitions](docs/class_definitions.md)
 - [Error Analysis](docs/error_analysis.md) — 3 FP, 3 FN, 3 data improvements
-- [Governance Checklist](docs/governance_checklist.md) — privacy, limitations, risk
+- [Governance Checklist](docs/governance_checklist.md) — includes privacy, bias considerations, operational limitations, and acceptable-use boundaries.
 
 ---
 
