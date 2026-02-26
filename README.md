@@ -21,6 +21,7 @@ Construction sites require continuous monitoring of heavy equipment for safety, 
 - **Source:** Roboflow (SiteAI-equipment-tracker, Team 7)
 - **Format:** YOLOv8 (exported from Roboflow)
 - **Split:** 80/20 (train/val)
+- **Images:** 59 validation images, 184 instances
 - **Image size:** 512×512
 - **Download:** Automatically downloaded from [GitHub Release v1.0](https://github.com/Vagiadim/SiteAI-equipment-tracker-/releases/tag/v1.0)
 
@@ -40,35 +41,38 @@ Construction sites require continuous monitoring of heavy equipment for safety, 
 
 ## Results
 
-Results from training YOLOv8n for 50 epochs at 512×512 resolution on a Tesla T4 GPU.
+Results from training YOLOv8n for 50 epochs at 512×512 resolution on a Tesla T4 GPU.  
+Training completed in 0.123 hours (~7.4 minutes).
 
 ### Overall Metrics
 
 | Metric | Value |
 |--------|-------|
-| Precision | _UPDATE AFTER RUN_ |
-| Recall | _UPDATE AFTER RUN_ |
-| mAP@50 | _UPDATE AFTER RUN_ |
-| mAP@50-95 | _UPDATE AFTER RUN_ |
+| Precision | 0.712 |
+| Recall | 0.565 |
+| mAP@50 | 0.637 |
+| mAP@50-95 | 0.465 |
 
 ### Per-Class Performance (mAP@50)
 
-| Class | mAP@50 | Status |
-|-------|--------|--------|
-| boom_lift | _UPDATE_ | |
-| dump_truck | _UPDATE_ | |
-| excavator | _UPDATE_ | |
-| loader | _UPDATE_ | |
-| mixer_truck | _UPDATE_ | |
-| roller | _UPDATE_ | |
-| tower_crane | _UPDATE_ | |
+| Class | Images | Instances | Precision | Recall | mAP@50 | mAP@50-95 | Status |
+|-------|--------|-----------|-----------|--------|--------|-----------|--------|
+| mixer_truck | 10 | 23 | 0.760 | 0.826 | 0.883 | 0.729 | ✅ Excellent |
+| roller | 10 | 13 | 0.760 | 0.769 | 0.879 | 0.784 | ✅ Excellent |
+| loader | 4 | 6 | 0.599 | 0.833 | 0.828 | 0.688 | ✅ Good |
+| excavator | 16 | 52 | 0.676 | 0.731 | 0.766 | 0.471 | ✅ Good |
+| dump_truck | 11 | 49 | 0.793 | 0.235 | 0.422 | 0.228 | ⚠️ Weak |
+| tower_crane | 9 | 36 | 0.599 | 0.361 | 0.394 | 0.217 | ⚠️ Weak |
+| boom_lift | 2 | 5 | 0.799 | 0.200 | 0.286 | 0.134 | ⚠️ Weak |
 
 ### Key Takeaways
 
-- Best performing classes: _UPDATE AFTER RUN_
-- Weakest classes: _UPDATE AFTER RUN_
+- **Best performing classes:** mixer_truck (88.3%), roller (87.9%), loader (82.8%) — all above 80% mAP@50
+- **Weakest classes:** boom_lift (28.6%), tower_crane (39.4%), dump_truck (42.2%)
+- Weak classes suffer from low recall, suggesting the model misses many instances (false negatives)
+- boom_lift has only 2 validation images / 5 instances — too few for reliable evaluation
 - The model serves as a viable proof-of-concept for automated construction equipment detection
-- Weak classes can be improved with more training data and better annotation coverage
+- Weak classes can be improved with more training data, better annotation coverage, and data augmentation
 
 ---
 
@@ -89,11 +93,10 @@ Results from training YOLOv8n for 50 epochs at 512×512 resolution on a Tesla T4
    - Train YOLOv8n for 50 epochs (512×512)
    - Evaluate and display metrics + training curves
    - Show a visual performance dashboard
-   - Run predictions on 10 validation images
+   - Run predictions on new test images downloaded from GitHub
    - Display a 6×6 evidence grid with class coverage
-   - Download and run predictions on 5 new unseen images from GitHub
    - Print a reproducibility summary
-5. Total runtime: ~30–50 minutes on T4 GPU
+5. Total runtime: ~20–40 minutes on T4 GPU
 
 ---
 
@@ -102,16 +105,22 @@ Results from training YOLOv8n for 50 epochs at 512×512 resolution on a Tesla T4
 | Parameter | Value |
 |-----------|-------|
 | Model | YOLOv8n (Nano) |
-| Framework | Ultralytics |
+| Framework | Ultralytics 8.4.18 |
+| Python | 3.12.12 |
+| PyTorch | 2.10.0+cu128 |
 | Epochs | 50 |
 | Image size | 512 |
 | Batch size | auto |
 | Early stopping | patience=15 |
 | Cache | RAM |
-| GPU | Tesla T4 (Google Colab) |
+| GPU | Tesla T4 (14913 MiB) |
+| Parameters | 3,007,013 |
+| GFLOPs | 8.1 |
 | Dataset | GitHub Release v1.0 (auto-download) |
 | New test images | GitHub repo (auto-download) |
 | Manual uploads | None (fully cloud-based) |
+| Training time | 0.123 hours (~7.4 min) |
+| Last run | 2026-02-26 |
 
 ---
 
@@ -168,7 +177,7 @@ SiteAI-equipment-tracker-/
 
 Download from [GitHub Release v1.0](https://github.com/Vagiadim/SiteAI-equipment-tracker-/releases/tag/v1.0):
 - `dataset.zip` — Full dataset (YOLOv8 format)
-- `best.pt` — Trained model weights
+- `best.pt` — Trained model weights (6.2 MB)
 
 ---
 
