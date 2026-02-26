@@ -79,6 +79,14 @@ Both models were trained for 50 epochs at 512×512 resolution on a Tesla T4 GPU.
 - The larger YOLOv8s model costs 3.5× more compute but delivers meaningful accuracy gains, especially for underrepresented classes
 - Both models serve as a viable proof-of-concept; weak classes need more training data and better annotation coverage
 
+### External Benchmark
+
+For reference, the same dataset trained with Roboflow's RF-DETR (Object Detection Small) achieved:
+- mAP@50: 89.2%
+- Precision: 88.0%
+- Recall: 87.4%
+
+This confirms the dataset quality is sufficient for high-accuracy detection. The gap between our YOLOv8s results (67.9% mAP@50) and RF-DETR (89.2%) suggests that a larger model architecture and/or more advanced training techniques could significantly improve performance.
 ---
 
 ## How to Reproduce
