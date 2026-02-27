@@ -34,7 +34,7 @@ As this system utilizes computer vision on active construction sites, the follow
 - Performance may degrade in: occlusion, low-light, extreme distance, unusual camera angles.
 
 ## Risk note (false negatives vs false positives)
-- **False negatives are more harmful** for planning/compliance use cases because missed equipment can lead to incomplete reporting or missed hazards.
+- **False negatives are more harmful** than False Positives on a live site for planning/compliance use cases because missed equipment can lead to incomplete reporting or missed hazards.
 - False positives increase review workload but are easier to correct by a human reviewer.
 
 ## Licensing
