@@ -14,6 +14,14 @@ Struck-by accidents involving heavy machinery are among the leading causes of fa
 
 ---
 
+## Final Deliverables (Short PDF Pack)
+As per the assignment requirements, the final presentation deck and executive summary report are hosted directly in this repository:
+
+* 📄 **[Executive Mini Report (PDF)](deliverables/B02_M04_U03_REPORT-MiniReport_VD_PUBLISHED_v04.pdf)**
+* 📊 **[Presentation Slides (PDF)](deliverables/B02_M04_U03_SLIDES-YOLOv8_VD_PUBLISHED_v02.pdf)**
+  
+---
+
 ## Classes & Label Rules
 
 | # | Class | Description | Label Rule |
@@ -103,7 +111,8 @@ SiteAI-equipment-tracker-/
 │   ├── curves/          # PR curves, F1 curves, confusion matrix
 │   └── evidence/        # Validation predictions, 6×6 grid, new test images
 ├── deliverables/
-│   └── mini_report.docx
+│   ├── B02_M04_U03_REPORT-MiniReport_VD_PUBLISHED_v04.pdf
+│   └── B02_M04_U03_SLIDES-YOLOv8_VD_PUBLISHED_v02.pdf
 ├── README.md
 └── LICENSE              # MIT
 ```
