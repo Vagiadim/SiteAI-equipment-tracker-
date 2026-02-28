@@ -18,13 +18,13 @@ Struck-by accidents involving heavy machinery are among the leading causes of fa
 
 | # | Class | Description | Label Rule |
 |---|-------|-------------|------------|
-| 0 | boom_lift | Aerial work platform with articulated boom | Bounding box around full machine including boom arm |
-| 1 | dump_truck | Heavy truck with tilting bed for material transport | Full vehicle including bed (raised or lowered) |
-| 2 | excavator | Tracked machine with hydraulic arm and bucket | Full machine including arm in any position |
-| 3 | loader | Wheeled machine with front bucket | Full vehicle including bucket |
-| 4 | mixer_truck | Concrete mixer with rotating drum | Full vehicle including drum and chute |
-| 5 | roller | Compaction machine with steel drum(s) | Full machine including drums |
-| 6 | tower_crane | Fixed crane with horizontal jib on lattice tower | Full visible structure (mast + jib) |
+| 1 | boom_lift | Aerial work platform with articulated boom | Bounding box around full machine including boom arm |
+| 2 | dump_truck | Heavy truck with tilting bed for material transport | Full vehicle including bed (raised or lowered) |
+| 3 | excavator | Tracked machine with hydraulic arm and bucket | Full machine including arm in any position |
+| 4 | loader | Wheeled machine with front bucket | Full vehicle including bucket |
+| 5 | mixer_truck | Concrete mixer with rotating drum | Full vehicle including drum and chute |
+| 6 | roller | Compaction machine with steel drum(s) | Full machine including drums |
+| 7 | tower_crane | Fixed crane with horizontal jib on lattice tower | Full visible structure (mast + jib) |
 
 ---
 
